@@ -74,6 +74,10 @@
     <Compile Include="Model\TileView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityFunctions.cs" />
+    <Compile Include="DeploymentController2.cs" />
+    <Compile Include="DiscoveryController2.cs" />
+    <Compile Include="DeploymentController3.cs" />
+    <Compile Include="DiscoveryController3.cs" />
     <Compile Include="InstructionController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +102,9 @@
     <None Include="Resources\images\deploy_play_button.png" />
     <None Include="Resources\images\deploy_randomize_button.png" />
     <None Include="Resources\images\discover.jpg" />
+    <None Include="Resources\images\discover2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\images\explosion.png" />
     <None Include="Resources\images\fdFile.png" />
     <None Include="Resources\images\fdFolder.png" />
@@ -135,10 +142,7 @@
     <None Include="Resources\sounds\SwinGameStart.wav" />
     <None Include="Resources\sounds\watershot.wav" />
     <None Include="Resources\sounds\winner.wav" />
-    <None Include="Resources\images\Clear.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\images\Instruction.png">
+    <None Include="Resources\images\instruction.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -27,10 +27,8 @@ static class DeploymentController
 
 	private const int LEFT_RIGHT_BUTTON_LEFT = 350;
 	private const int RANDOM_BUTTON_LEFT = 547;
-	private const int CLEAR_BUTTON_LEFT = 608;
 
 	private const int RANDOM_BUTTON_WIDTH = 51;
-	private const int CLEAR_BUTTON_WIDTH = 51;
 
 	private const int DIR_BUTTONS_WIDTH = 47;
 
@@ -80,25 +78,14 @@ static class DeploymentController
 				DoDeployClick();
 			}
 
-			if (GameController.HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			if (GameController.HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				GameController.EndDeployment();
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			} else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				_currentDirection = Direction.UpDown;
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			} else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				_currentDirection = Direction.LeftRight;
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			} else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				GameController.HumanPlayer.RandomizeDeployment();
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(CLEAR_BUTTON_LEFT, TOP_BUTTONS_TOP, CLEAR_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
-				GameController.HumanPlayer.ClearDeployment();
 			}
 		}
 	}
@@ -180,8 +167,6 @@ static class DeploymentController
 		}
 
 		SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
-
-		SwinGame.DrawBitmap(GameResources.GameImage("Clear"), CLEAR_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
 		UtilityFunctions.DrawMessage();
 	}

@@ -1,14 +1,12 @@
-﻿<Properties>
+﻿<Properties StartupConfiguration="{C8661810-E2B6-48D7-BC49-E7AB4F066EF4}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Model\SeaGrid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src Status">
     <Files>
-      <File FileName="DeploymentController.cs" Line="159" Column="3" />
-      <File FileName="Model\Player.cs" Line="259" Column="4" />
-      <File FileName="Model\SeaGrid.cs" Line="152" Column="21" />
+      <File FileName="src Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

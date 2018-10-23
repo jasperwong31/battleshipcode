@@ -1,4 +1,3 @@
-
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -30,6 +29,35 @@ static class EndingGameController
 		}
 	}
 
+	public static void DrawEndOfGame2()
+	{
+		UtilityFunctions.DrawField(GameController.HumanPlayer2.PlayerGrid, GameController.HumanPlayer2, true);
+		UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
+
+		if (GameController.HumanPlayer.IsDestroyed)
+		{
+			
+			SwinGame.DrawTextLines("PLAYER 2 WIN!", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
+		}
+		else
+		{
+			SwinGame.DrawTextLines("PLAYER 1 WIN!", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
+		}	}
+
+	public static void DrawEndOfGame3()
+	{
+		UtilityFunctions.DrawField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer, true);
+		UtilityFunctions.DrawSmallField(GameController.HumanPlayer2.PlayerGrid, GameController.HumanPlayer2);
+
+		if (GameController.HumanPlayer.IsDestroyed)
+		{
+			SwinGame.DrawTextLines("PLAYER 2 WIN!", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
+		}
+		else
+		{
+			SwinGame.DrawTextLines("PLAYER 1 WIN!", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
+		}	}
+
 	/// <summary>
 	/// Handle the input during the end of the game. Any interaction
 	/// will result in it reading in the highsSwinGame.
@@ -42,4 +70,10 @@ static class EndingGameController
 		}
 	}
 
+	public static void HandleEndOfGameInput2()
+	{
+		if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.vk_RETURN) || SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
+		{
+			GameController.EndCurrentState();
+		}	}
 }

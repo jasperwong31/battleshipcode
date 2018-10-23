@@ -234,29 +234,6 @@ public class Player : IEnumerable<Ship>
 			} while (!placementSuccessful);
 		}
 	}
-
-	public virtual void ClearDeployment()
-	{
-		/*PlayerGrid.MoveShip(0, 0, ShipName.Tug, Direction.LeftRight);
-		PlayerGrid.MoveShip(1, 0, ShipName.Submarine, Direction.LeftRight);
-		PlayerGrid.MoveShip(2, 0, ShipName.Destroyer, Direction.LeftRight);
-		PlayerGrid.MoveShip(3, 0, ShipName.Battleship, Direction.LeftRight);
-		PlayerGrid.MoveShip(9, 9, ShipName.AircraftCarrier, Direction.LeftRight);
-		Ship[] myship = new Ship[5];
-		myship[0] = new Ship(ShipName.Tug);
-		myship[1] = new Ship(ShipName.Submarine);
-		myship[2] = new Ship(ShipName.Destroyer);
-		myship[3] = new Ship(ShipName.Battleship);
-		myship[4] = new Ship(ShipName.AircraftCarrier);
-		myship[0].Remove();
-		myship[1].Remove();
-		myship[2].Remove();
-		myship[3].Remove();
-		myship[4].Remove();*/
-		foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
-		{
-			
-		}	}
 }
 
 //=======================================================

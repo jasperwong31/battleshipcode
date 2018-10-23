@@ -53,5 +53,19 @@ public enum GameState
 	/// </summary>
 	Quitting,
 
+	ChooseMode,
+
+	Deploying2,
+
+	Deploying3,
+
+	Discovering2,
+
+	Discovering3,
+
+	EndingGame2,
+
+	EndingGame3,
+
 	Instruction
 }

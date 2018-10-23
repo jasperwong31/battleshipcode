@@ -1,4 +1,3 @@
-
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -16,7 +15,9 @@ public static class GameController
 {
 
 	private static BattleShipsGame _theGame;
-	private static Player _human;
+	private static BattleShipsGame _theGame2;
+	private static Player _human1;
+	private static Player _human2;
 
 	private static AIPlayer _ai;
 
@@ -39,8 +40,11 @@ public static class GameController
 	/// <value>the human player</value>
 	/// <returns>the human player</returns>
 	public static Player HumanPlayer {
-		get { return _human; }
+		get { return _human1; }
 	}
+
+	public static Player HumanPlayer2 {
+		get { return _human2; }	}
 
 	/// <summary>
 	/// Returns the computer player.
@@ -91,7 +95,7 @@ public static class GameController
 				break;
 		}
 
-		_human = new Player(_theGame);
+		_human1 = new Player(_theGame);
 
 		//AddHandler _human.PlayerGrid.Changed, AddressOf GridChanged
 		_ai.PlayerGrid.Changed += GridChanged;
@@ -99,6 +103,21 @@ public static class GameController
 
 		AddNewState(GameState.Deploying);
 	}
+
+	public static void StartGame2()
+	{
+		if (_theGame2 != null)
+			EndGame2();
+
+		//Create the game
+		_theGame2 = new BattleShipsGame();
+
+		_human1 = new Player(_theGame2);
+		_human2 = new Player(_theGame2);
+
+		_theGame2.AttackCompleted += AttackCompleted2;
+
+		AddNewState(GameState.Deploying2);	}
 
 	/// <summary>
 	/// Stops listening to the old game once a new game is started
@@ -110,6 +129,12 @@ public static class GameController
 		_ai.PlayerGrid.Changed -= GridChanged;
 		_theGame.AttackCompleted -= AttackCompleted;
 	}
+
+	private static void EndGame2()
+	{
+		//RemoveHandler _human.PlayerGrid.Changed, AddressOf GridChanged
+		_human2.PlayerGrid.Changed -= GridChanged;
+		_theGame2.AttackCompleted -= AttackCompleted2;	}
 
 	/// <summary>
 	/// Listens to the game grids for any changes and redraws the screen
@@ -198,6 +223,110 @@ public static class GameController
 		}
 	}
 
+	private static void AttackCompleted2(object sender, AttackResult result)
+	{
+		bool isHuman = false;
+		bool isHuman2 = false;
+		isHuman = object.ReferenceEquals(_theGame2.Player, HumanPlayer);
+		isHuman2 = object.ReferenceEquals(_theGame2.Player, HumanPlayer2);
+
+		if (isHuman)
+		{
+			UtilityFunctions.Message = "Player 1 " + result.ToString();
+		}
+		else
+		{
+			UtilityFunctions.Message = "Player 2 " + result.ToString();
+		}
+
+		if (GameController.CurrentState == GameState.Discovering2)
+		{
+			switch (result.Value)
+			{
+				case ResultOfAttack.Destroyed:
+					PlayHitSequence(result.Row, result.Column, isHuman);
+					Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+
+					break;
+				case ResultOfAttack.GameOver:
+					PlayHitSequence(result.Row, result.Column, isHuman);
+					Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+
+					while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink")))
+					{
+						SwinGame.Delay(10);
+						SwinGame.RefreshScreen();
+					}
+
+					if (HumanPlayer.IsDestroyed)
+					{
+						Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+						EndCurrentState();
+
+					}
+					else
+					{
+						Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+						EndCurrentState();
+					}
+
+					break;
+				case ResultOfAttack.Hit:
+					PlayHitSequence(result.Row, result.Column, isHuman);
+					break;
+				case ResultOfAttack.Miss:
+					PlayMissSequence(result.Row, result.Column, isHuman);
+					break;
+				case ResultOfAttack.ShotAlready:
+					Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+					break;
+			}
+		}
+		else
+		{
+			switch (result.Value)
+			{
+				case ResultOfAttack.Destroyed:
+                    PlayHitSequence(result.Row, result.Column, isHuman2);
+					Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+
+					break;
+				case ResultOfAttack.GameOver:
+					PlayHitSequence(result.Row, result.Column, isHuman2);
+					Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+
+					while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink")))
+					{
+						SwinGame.Delay(10);
+						SwinGame.RefreshScreen();
+					}
+
+					if (HumanPlayer.IsDestroyed)
+					{
+						Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+						EndCurrentState();
+
+					}
+					else
+					{
+						Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+						EndCurrentState();
+					}
+
+					break;
+				case ResultOfAttack.Hit:
+					PlayHitSequence(result.Row, result.Column, isHuman2);
+					break;
+				case ResultOfAttack.Miss:
+					PlayMissSequence(result.Row, result.Column, isHuman2);
+					break;
+				case ResultOfAttack.ShotAlready:
+					Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+					break;
+			}
+		}
+	}
+
 	/// <summary>
 	/// Completes the deployment phase of the game and
 	/// switches to the battle mode (Discovering state)
@@ -209,11 +338,25 @@ public static class GameController
 	public static void EndDeployment()
 	{
 		//deploy the players
-		_theGame.AddDeployedPlayer(_human);
+		_theGame.AddDeployedPlayer(_human1);
 		_theGame.AddDeployedPlayer(_ai);
 
 		SwitchState(GameState.Discovering);
 	}
+
+	public static void EndDeployment2()
+	{
+		//deploy the players
+		_theGame2.AddDeployedPlayer(_human1);
+
+		SwitchState(GameState.Deploying3);	}
+
+	public static void EndDeployment3()
+	{
+		//deploy the players
+		_theGame2.AddDeployedPlayer(_human2);
+
+		SwitchState(GameState.Discovering2);	}
 
 	/// <summary>
 	/// Gets the player to attack the indicated row and column.
@@ -229,6 +372,18 @@ public static class GameController
 		result = _theGame.Shoot(row, col);
 		CheckAttackResult(result);
 	}
+
+	public static void Attack2(int row, int col)
+	{
+		AttackResult result = default(AttackResult);
+		result = _theGame2.Shoot(row, col);
+		CheckAttackResult2(result);	}
+
+	public static void Attack3(int row, int col)
+	{
+		AttackResult result = default(AttackResult);
+		result = _theGame2.Shoot(row, col);
+		CheckAttackResult3(result);	}
 
 	/// <summary>
 	/// Gets the AI to attack.
@@ -264,6 +419,31 @@ public static class GameController
 		}
 	}
 
+	private static void CheckAttackResult2(AttackResult result)
+	{
+		switch (result.Value)
+		{
+			case ResultOfAttack.Miss:
+				if (object.ReferenceEquals(_theGame2.Player, HumanPlayer2))
+					_state.Push(GameState.Discovering3);
+				break;
+			case ResultOfAttack.GameOver:
+				SwitchState(GameState.EndingGame2);
+				break;
+		}	}
+
+	private static void CheckAttackResult3(AttackResult result)
+	{
+		switch (result.Value)
+		{
+			case ResultOfAttack.Miss:
+				if (object.ReferenceEquals(_theGame2.Player, HumanPlayer))
+					_state.Push(GameState.Discovering2);
+				break;
+			case ResultOfAttack.GameOver:
+				SwitchState(GameState.EndingGame3);
+				break;
+		}	}
 
 	/// <summary>
 	/// Handles the user SwinGame.
@@ -291,14 +471,33 @@ public static class GameController
 			case GameState.Deploying:
 				DeploymentController.HandleDeploymentInput();
 				break;
+			case GameState.Deploying2:
+				DeploymentController2.HandleDeploymentInput();
+				break;
+			case GameState.Deploying3:
+				DeploymentController3.HandleDeploymentInput();
+				break;
 			case GameState.Discovering:
 				DiscoveryController.HandleDiscoveryInput();
+				break;
+			case GameState.Discovering2:
+				DiscoveryController2.HandleDiscoveryInput();
+				break;
+			case GameState.Discovering3:
+				DiscoveryController3.HandleDiscoveryInput();
 				break;
 			case GameState.EndingGame:
 				EndingGameController.HandleEndOfGameInput();
 				break;
+			case GameState.EndingGame2:
+			case GameState.EndingGame3:
+				EndingGameController.HandleEndOfGameInput2();
+				break;
 			case GameState.ViewingHighScores:
 				HighScoreController.HandleHighScoreInput();
+				break;
+			case GameState.ChooseMode:
+				MenuController.HandleModeMenuInput();
 				break;
 			case GameState.Instruction:
 				InstructionController.HandleHighScoreInput();
@@ -331,14 +530,35 @@ public static class GameController
 			case GameState.Deploying:
 				DeploymentController.DrawDeployment();
 				break;
+			case GameState.Deploying2:
+				DeploymentController2.DrawDeployment();
+				break;
+			case GameState.Deploying3:
+				DeploymentController3.DrawDeployment();
+				break;
 			case GameState.Discovering:
 				DiscoveryController.DrawDiscovery();
+				break;
+			case GameState.Discovering2:
+				DiscoveryController2.DrawDiscovery();
+				break;
+			case GameState.Discovering3:
+				DiscoveryController3.DrawDiscovery();
 				break;
 			case GameState.EndingGame:
 				EndingGameController.DrawEndOfGame();
 				break;
+			case GameState.EndingGame2:
+				EndingGameController.DrawEndOfGame2();
+				break;
+			case GameState.EndingGame3:
+				EndingGameController.DrawEndOfGame3();
+				break;
 			case GameState.ViewingHighScores:
 				HighScoreController.DrawHighScores();
+				break;
+			case GameState.ChooseMode:
+				MenuController.DrawChoose();
 				break;
 			case GameState.Instruction:
 				InstructionController.Background();

@@ -25,24 +25,30 @@ static class MenuController
 			"DIFFICULTY",
 			"SCORES",
 			"INSTRUCTION",
+			"SOUND ON/OFF",
 			"QUIT"
 		},
 		new string[] {
 			"RETURN",
 			"SURRENDER",
+			"SOUND ON/OFF",
 			"QUIT"
 		},
 		new string[] {
 			"EASY",
 			"MEDIUM",
 			"HARD"
+		},
+		new string[] {
+			"ONE PLAYER",
+			"TWO PLAYER"
 		}
 
 	};
 	private const int MENU_TOP = 575;
 	private const int MENU_LEFT = 30;
 	private const int MENU_GAP = 0;
-	private const int BUTTON_WIDTH = 80;
+	private const int BUTTON_WIDTH = 100;
 	private const int BUTTON_HEIGHT = 15;
 	private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
 
@@ -51,21 +57,26 @@ static class MenuController
 	private const int GAME_MENU = 1;
 
 	private const int SETUP_MENU = 2;
+	private const int MODE_MENU = 3;
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
-	private const int MAIN_MENU_INSTRUCTION_BUTTON = 3;
 
-	private const int MAIN_MENU_QUIT_BUTTON = 4;
+	private const int MAIN_MENU_QUIT_BUTTON = 5;
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 	private const int SETUP_MENU_HARD_BUTTON = 2;
 
-	private const int SETUP_MENU_EXIT_BUTTON = 4;
+	private const int SETUP_MENU_EXIT_BUTTON = 5;
 	private const int GAME_MENU_RETURN_BUTTON = 0;
 	private const int GAME_MENU_SURRENDER_BUTTON = 1;
+	private const int GAME_MENU_SOUND_BUTTON = 2;
 
-	private const int GAME_MENU_QUIT_BUTTON = 2;
+	private const int GAME_MENU_QUIT_BUTTON = 3;
+	private const int PLAY_ONE_PLAYER = 0;
+	private const int PLAY_TWO_PLAYER = 1;
+	private const int MENU_SOUND = 4;
+	private const int MAIN_MENU_INSTRUCTION_BUTTON = 3;
 	private static readonly Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
 
 	private static readonly Color HIGHLIGHT_COLOR = SwinGame.RGBAColor(1, 57, 86, 255);
@@ -89,6 +100,16 @@ static class MenuController
 			HandleMenuInput(MAIN_MENU, 0, 0);
 		}
 	}
+
+	public static void HandleModeMenuInput()
+	{
+		bool handled = false;
+		handled = HandleMenuInput(MODE_MENU, 1, 0);
+
+		if (!handled)
+		{
+			HandleMenuInput(MAIN_MENU, 0, 0);
+		}	}
 
 	/// <summary>
 	/// Handle input in the game menu.
@@ -171,6 +192,14 @@ static class MenuController
 		DrawButtons(SETUP_MENU, 1, 1);
 	}
 
+	public static void DrawChoose()
+	{
+		//Clears the Screen to Black
+		//SwinGame.DrawText("Settings", Color.White, GameFont("ArialLarge"), 50, 50)
+
+		DrawButtons(MAIN_MENU);
+		DrawButtons(MODE_MENU, 1, 0);	}
+
 	/// <summary>
 	/// Draw the buttons associated with a top level menu.
 	/// </summary>
@@ -245,6 +274,9 @@ static class MenuController
 			case MAIN_MENU:
 				PerformMainMenuAction(button);
 				break;
+			case MODE_MENU:
+				PerformModeMenuAction(button);
+				break;
 			case SETUP_MENU:
 				PerformSetupMenuAction(button);
 				break;
@@ -262,7 +294,8 @@ static class MenuController
 	{
 		switch (button) {
 			case MAIN_MENU_PLAY_BUTTON:
-				GameController.StartGame();
+				//GameController.StartGame();
+				GameController.AddNewState(GameState.ChooseMode);
 				break;
 			case MAIN_MENU_SETUP_BUTTON:
 				GameController.AddNewState(GameState.AlteringSettings);
@@ -272,6 +305,16 @@ static class MenuController
 				break;
 			case MAIN_MENU_INSTRUCTION_BUTTON:
 				GameController.AddNewState(GameState.Instruction);
+				break;
+			case MENU_SOUND:
+				if (SwinGame.MusicPlaying())
+				{
+					SwinGame.StopMusic();
+				}
+				else
+				{
+					SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+				}
 				break;
 			case MAIN_MENU_QUIT_BUTTON:
 				GameController.EndCurrentState();
@@ -300,6 +343,18 @@ static class MenuController
 		GameController.EndCurrentState();
 	}
 
+	private static void PerformModeMenuAction(int button)
+	{
+		switch (button)
+		{
+			case PLAY_ONE_PLAYER:
+				GameController.StartGame();
+				break;
+			case PLAY_TWO_PLAYER:
+				GameController.StartGame2();
+				break;
+		}	}
+
 	/// <summary>
 	/// The game menu was clicked, perform the button's action.
 	/// </summary>
@@ -315,6 +370,16 @@ static class MenuController
 				//end game menu
 				GameController.EndCurrentState();
 				//end game
+				break;
+			case GAME_MENU_SOUND_BUTTON:
+				if (SwinGame.MusicPlaying())
+				{
+					SwinGame.StopMusic();
+				}
+				else
+				{
+					SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+				}
 				break;
 			case GAME_MENU_QUIT_BUTTON:
 				GameController.AddNewState(GameState.Quitting);
