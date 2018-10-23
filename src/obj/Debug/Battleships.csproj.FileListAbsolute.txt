@@ -1,0 +1,9 @@
+C:\Users\Willy\Desktop\BattleshipWiki-master\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Willy\Desktop\BattleshipWiki-master\src\obj\Debug\Battleships.csproj.Battleships.exe.config
+C:\Users\Willy\Desktop\BattleshipWiki-master\bin\Debug\Battleships.exe.config
+C:\Users\Willy\Desktop\BattleshipWiki-master\bin\Debug\Battleships.exe
+C:\Users\Willy\Desktop\BattleshipWiki-master\bin\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\BattleshipWiki-master\src\obj\Debug\Battleships.exe
+C:\Users\Willy\Desktop\BattleshipWiki-master\src\obj\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\BattleshipWiki-master\bin\Debug\Resources\images\Clear.png
+C:\Users\Willy\Desktop\BattleshipWiki-master\bin\Debug\Resources\images\Instruction.png
