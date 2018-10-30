@@ -601,6 +601,11 @@ public static class GameController
 		_state.Pop();
 	}
 
+	public static void FullScreen()
+	{
+		SwinGame.ToggleFullScreen();	}
+
+
 	/// <summary>
 	/// Sets the difficulty for the next level of the game.
 	/// </summary>

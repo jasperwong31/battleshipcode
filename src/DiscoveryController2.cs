@@ -1,5 +1,4 @@
-
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using SwinGameSDK;
 /// <summary>
 /// The battle phase is handled by the DiscoveryController.
 /// </summary>
-static class DiscoveryController
+static class DiscoveryController2
 {
 
 	/// <summary>
@@ -22,16 +21,18 @@ static class DiscoveryController
 	/// </remarks>
 	public static void HandleDiscoveryInput()
 	{
-		if (SwinGame.KeyTyped(KeyCode.vk_F11)) {
-
+		if (SwinGame.KeyTyped(KeyCode.vk_F11)) 
+		{
 			GameController.FullScreen();
 		}
 
-		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
+		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
+		{
 			GameController.AddNewState(GameState.ViewingGameMenu);
 		}
 
-		if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
+		if (SwinGame.MouseClicked(MouseButton.LeftButton))
+		{
 			DoAttack();
 		}
 	}
@@ -51,9 +52,11 @@ static class DiscoveryController
 		row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
 		col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
-		if (row >= 0 & row < GameController.HumanPlayer.EnemyGrid.Height) {
-			if (col >= 0 & col < GameController.HumanPlayer.EnemyGrid.Width) {
-				GameController.Attack(row, col);
+		if (row >= 0 & row < GameController.HumanPlayer.EnemyGrid.Height)
+		{
+			if (col >= 0 & col < GameController.HumanPlayer.EnemyGrid.Width)
+			{
+				GameController.Attack2(row, col);
 			}
 		}
 	}
@@ -68,21 +71,21 @@ static class DiscoveryController
 		const int HITS_TOP = 206;
 		const int SPLASH_TOP = 256;
 
-		if ((SwinGame.KeyDown(KeyCode.vk_LSHIFT) | SwinGame.KeyDown(KeyCode.vk_RSHIFT)) & SwinGame.KeyDown(KeyCode.vk_c)) {
-			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, true);
-		} else {
-			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, false);
+		if ((SwinGame.KeyDown(KeyCode.vk_LSHIFT) | SwinGame.KeyDown(KeyCode.vk_RSHIFT)) & SwinGame.KeyDown(KeyCode.vk_c))
+		{
+			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.HumanPlayer2, true);
+		}
+		else
+		{
+			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.HumanPlayer2, false);
 		}
 
-		UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
 		UtilityFunctions.DrawMessage();
 
 		SwinGame.DrawText(GameController.HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
 		SwinGame.DrawText(GameController.HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
 		SwinGame.DrawText(GameController.HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
-		SwinGame.CreateTimer();
-		SwinGame.TimerNamed("Timer");
-		SwinGame.StartTimer("Timer");
+		SwinGame.DrawText("Player 1's Phase", Color.White, GameResources.GameFont("Menu"), 100, 300);
 		//SwinGame.DrawText(GameController.setting.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_BOTTOM);
 	}
 

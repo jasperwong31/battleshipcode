@@ -7,3 +7,32 @@ C:\Users\Willy\Desktop\C# - Copy\src\obj\Debug\Battleships.csprojResolveAssembly
 C:\Users\Willy\Desktop\C# - Copy\src\obj\Debug\Battleships.csproj.Battleships.exe.config
 C:\Users\Willy\Desktop\C# - Copy\src\obj\Debug\Battleships.exe
 C:\Users\Willy\Desktop\C# - Copy\src\obj\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\Battleship\bin\Debug\Resources\images\discover2.jpg
+C:\Users\Willy\Desktop\Battleship\bin\Debug\Resources\images\instruction.png
+C:\Users\Willy\Desktop\Battleship\bin\Debug\Battleships.exe.config
+C:\Users\Willy\Desktop\Battleship\bin\Debug\Battleships.exe
+C:\Users\Willy\Desktop\Battleship\bin\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\Battleship\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Willy\Desktop\Battleship\src\obj\Debug\Battleships.csproj.Battleships.exe.config
+C:\Users\Willy\Desktop\Battleship\src\obj\Debug\Battleships.exe
+C:\Users\Willy\Desktop\Battleship\src\obj\Debug\Battleships.pdb
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\src\obj\Debug\Battleships.exe
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\src\obj\Debug\Battleships.pdb
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Resources\images\discover2.jpg
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Resources\images\instruction.png
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Battleships.exe.config
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Battleships.exe
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Battleships.pdb
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Resources\images\clear.png
+C:\Users\Chun Chen\Desktop\Battleship\Battleship\bin\Debug\Resources\sounds\horrordrone.mp3
+C:\battleshipcode\bin\Debug\Resources\sounds\horrordrone.mp3
+C:\battleshipcode\bin\Debug\Resources\images\discover2.jpg
+C:\battleshipcode\bin\Debug\Resources\images\instruction.png
+C:\battleshipcode\bin\Debug\Resources\images\clear.png
+C:\battleshipcode\bin\Debug\Battleships.exe.config
+C:\battleshipcode\bin\Debug\Battleships.exe
+C:\battleshipcode\bin\Debug\Battleships.pdb
+C:\battleshipcode\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\battleshipcode\src\obj\Debug\Battleships.exe
+C:\battleshipcode\src\obj\Debug\Battleships.pdb

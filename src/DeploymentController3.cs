@@ -1,4 +1,4 @@
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ using SwinGameSDK;
 /// The DeploymentController controls the players actions
 /// during the deployment phase.
 /// </summary>
-static class DeploymentController
+static class DeploymentController3
 {
-	
+
 	private const int SHIPS_TOP = 98;
 	private const int SHIPS_LEFT = 20;
 	private const int SHIPS_HEIGHT = 90;
@@ -59,40 +59,54 @@ static class DeploymentController
 			GameController.FullScreen();
 		}
 
-		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
+		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
+		{
 			GameController.AddNewState(GameState.ViewingGameMenu);
 		}
 
-		if (SwinGame.KeyTyped(KeyCode.vk_UP) | SwinGame.KeyTyped(KeyCode.vk_DOWN)) {
+		if (SwinGame.KeyTyped(KeyCode.vk_UP) | SwinGame.KeyTyped(KeyCode.vk_DOWN))
+		{
 			_currentDirection = Direction.UpDown;
 		}
-		if (SwinGame.KeyTyped(KeyCode.vk_LEFT) | SwinGame.KeyTyped(KeyCode.vk_RIGHT)) {
+		if (SwinGame.KeyTyped(KeyCode.vk_LEFT) | SwinGame.KeyTyped(KeyCode.vk_RIGHT))
+		{
 			_currentDirection = Direction.LeftRight;
 		}
 
-		if (SwinGame.KeyTyped(KeyCode.vk_r)) {
-			GameController.HumanPlayer.RandomizeDeployment();
+		if (SwinGame.KeyTyped(KeyCode.vk_r))
+		{
+			GameController.HumanPlayer2.RandomizeDeployment();
 		}
 
-		if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
+		if (SwinGame.MouseClicked(MouseButton.LeftButton))
+		{
 			ShipName selected = default(ShipName);
 			selected = GetShipMouseIsOver();
-			if (selected != ShipName.None) {
+			if (selected != ShipName.None)
+			{
 				_selectedShip = selected;
-			} else {
+			}
+			else
+			{
 				DoDeployClick();
 			}
 
-			if (GameController.HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
-				GameController.EndDeployment();
-			} else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
-				_currentDirection = Direction.UpDown;
-			} else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
-				_currentDirection = Direction.LeftRight;
-			} else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
-				GameController.HumanPlayer.RandomizeDeployment();
+			if (GameController.HumanPlayer2.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+			{
+				GameController.EndDeployment3();
 			}
-		
+			else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+			{
+				_currentDirection = Direction.UpDown;
+			}
+			else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+			{
+				_currentDirection = Direction.LeftRight;
+			}
+			else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+			{
+				GameController.HumanPlayer2.RandomizeDeployment();
+			}
 		}
 	}
 
@@ -116,12 +130,17 @@ static class DeploymentController
 		row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
 		col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
-		if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height) {
-			if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width) {
+		if (row >= 0 & row < GameController.HumanPlayer2.PlayerGrid.Height)
+		{
+			if (col >= 0 & col < GameController.HumanPlayer2.PlayerGrid.Width)
+			{
 				//if in the area try to deploy
-				try {
-					GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
-				} catch (Exception ex) {
+				try
+				{
+					GameController.HumanPlayer2.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+				}
+				catch (Exception ex)
+				{
 					Audio.PlaySoundEffect(GameResources.GameSound("Error"));
 					UtilityFunctions.Message = ex.Message;
 				}
@@ -135,25 +154,32 @@ static class DeploymentController
 	/// </summary>
 	public static void DrawDeployment()
 	{
-		UtilityFunctions.DrawField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer, true);
+		UtilityFunctions.DrawField(GameController.HumanPlayer2.PlayerGrid, GameController.HumanPlayer2, true);
+		SwinGame.DrawText("Player 2's Deployment", Color.White, GameResources.GameFont("Menu"), 150, 75);
 
 		//Draw the Left/Right and Up/Down buttons
-		if (_currentDirection == Direction.LeftRight) {
+		if (_currentDirection == Direction.LeftRight)
+		{
 			SwinGame.DrawBitmap(GameResources.GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
 			//SwinGame.DrawText("U/D", Color.Gray, GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
 			//SwinGame.DrawText("L/R", Color.White, GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
-		} else {
+		}
+		else
+		{
 			SwinGame.DrawBitmap(GameResources.GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
 			//SwinGame.DrawText("U/D", Color.White, GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
 			//SwinGame.DrawText("L/R", Color.Gray, GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
 		}
 
 		//DrawShips
-		foreach (ShipName sn in Enum.GetValues(typeof(ShipName))) {
+		foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
+		{
 			int i = 0;
-			i = ((int) sn) - 1;
-			if (i >= 0) {
-				if (sn == _selectedShip) {
+			i = ((int)sn) - 1;
+			if (i >= 0)
+			{
+				if (sn == _selectedShip)
+				{
 					SwinGame.DrawBitmap(GameResources.GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
 					//    SwinGame.FillRectangle(Color.LightBlue, SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT)
 					//Else
@@ -166,7 +192,8 @@ static class DeploymentController
 			}
 		}
 
-		if (GameController.HumanPlayer.ReadyToDeploy) {
+		if (GameController.HumanPlayer2.ReadyToDeploy)
+		{
 			SwinGame.DrawBitmap(GameResources.GameImage("PlayButton"), PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP);
 			//SwinGame.FillRectangle(Color.LightBlue, PLAY_BUTTON_LEFT, PLAY_BUTTON_TOP, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT)
 			//SwinGame.DrawText("PLAY", Color.Black, GameFont("Courier"), PLAY_BUTTON_LEFT + TEXT_OFFSET, PLAY_BUTTON_TOP)
@@ -183,11 +210,13 @@ static class DeploymentController
 	/// <returns>The ship selected or none</returns>
 	private static ShipName GetShipMouseIsOver()
 	{
-		foreach (ShipName sn in Enum.GetValues(typeof(ShipName))) {
+		foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
+		{
 			int i = 0;
 			i = ((int)sn) - 1;
 
-			if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT)) {
+			if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
+			{
 				return sn;
 			}
 		}
