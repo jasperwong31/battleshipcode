@@ -24,6 +24,8 @@ static class HighScoreController
 	/// </summary>
 	private struct Score : IComparable
 	{
+		public uint Time;
+
 		public string Name;
 
 		public int Value;
@@ -61,11 +63,16 @@ static class HighScoreController
 	/// </remarks>
 	private static void LoadScores()
 	{
+
 		string filename = null;
 		filename = SwinGame.PathToResource("highscores.txt");
 
 		StreamReader input = default(StreamReader);
+
+		StreamReader input2 = default(StreamReader);
 		input = new StreamReader(filename);
+		string filename2 = SwinGame.PathToResource("time.txt");
+		input2 = new StreamReader(filename2);
 
 		//Read in the # of scores
 		int numScores = 0;
@@ -77,15 +84,17 @@ static class HighScoreController
 
 		for (i = 1; i <= numScores; i++) {
 			Score s = default(Score);
-			string line = null;
-
+		string line = null;
+		string line2 = null;
 			line = input.ReadLine();
-
+			line2 = input2.ReadLine ();
 			s.Name = line.Substring(0, NAME_WIDTH);
 			s.Value = Convert.ToInt32(line.Substring(NAME_WIDTH));
+			s.Time = Convert.ToUInt32 (line2);
 			_Scores.Add(s);
 		}
 		input.Close();
+		input2.Close();
 	}
 
 	/// <summary>
@@ -106,6 +115,8 @@ static class HighScoreController
 		StreamWriter output = default(StreamWriter);
 		output = new StreamWriter(filename);
 
+
+
 		output.WriteLine(_Scores.Count);
 
 		foreach (Score s in _Scores) {
@@ -113,7 +124,25 @@ static class HighScoreController
 		}
 
 		output.Close();
+		SaveTime();
 	}
+
+	public static void SaveTime()
+	{ 
+		string filename = null;
+		filename = SwinGame.PathToResource ("timer.txt");
+		StreamWriter output = default(StreamWriter);
+		output = new StreamWriter(filename);
+
+		output.WriteLine(_Scores.Count);
+		foreach (Score s in _Scores) 
+		{
+			output.WriteLine (s.Time);
+		}
+
+		output.Close ();
+	}
+
 
 	/// <summary>
 	/// Draws the high scores to the screen.
@@ -135,12 +164,15 @@ static class HighScoreController
 			Score s = default(Score);
 
 			s = _Scores[i];
+			TimeSpan time = TimeSpan.FromSeconds(s.Time);
 
 			//for scores 1 - 9 use 01 - 09
 			if (i < 9) {
 				SwinGame.DrawText(" " + (i + 1) + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
+				SwinGame.DrawText (time.ToString(@"mm\:ss"), Color.White, GameResources.GameFont ("Courier"), SCORES_LEFT+130, SCORES_TOP + i* SCORE_GAP);
 			} else {
 				SwinGame.DrawText(i + 1 + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
+				SwinGame.DrawText (time.ToString(@"mm\:ss"), Color.White, GameResources.GameFont ("Courier"), SCORES_LEFT+130, SCORES_TOP + i* SCORE_GAP);
 			}
 		}
 	}
@@ -163,7 +195,7 @@ static class HighScoreController
 	/// <remarks>
 	/// This verifies if the score is a highsSwinGame.
 	/// </remarks>
-	public static void ReadHighScore(int value)
+	public static void ReadHighScore(int value,uint time)
 	{
 		const int ENTRY_TOP = 500;
 
@@ -202,6 +234,7 @@ static class HighScoreController
 			_Scores.Add(s);
 			_Scores.Sort();
 			SaveScores ();
+			s.Time = time;
 
 			GameController.EndCurrentState();
 		}	

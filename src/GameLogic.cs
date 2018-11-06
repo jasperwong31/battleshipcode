@@ -18,9 +18,17 @@ static class GameLogic
 		GameResources.LoadResources();
 
 		SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+		Timer t = SwinGame.CreateTimer();
+		SwinGame.StartTimer(t);
 
 		//Game Loop
 		do {
+			uint time = SwinGame.TimerTicks(t) / 1000;
+			GameController.time = time;
+
+			if (GameController.CurrentState == GameState.Quitting)
+				SwinGame.StopTimer(t);
+			
 			GameController.HandleUserInput();
 			GameController.DrawScreen();
 		} while (!(SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting));

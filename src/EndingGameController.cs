@@ -62,15 +62,15 @@ static class EndingGameController
 	/// Handle the input during the end of the game. Any interaction
 	/// will result in it reading in the highsSwinGame.
 	/// </summary>
-	public static void HandleEndOfGameInput()
+	public static void HandleEndOfGameInput(uint time)
 	{
 		if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.vk_RETURN) || SwinGame.KeyTyped(KeyCode.vk_F11) || SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
-			HighScoreController.ReadHighScore(GameController.HumanPlayer.Score);
+			HighScoreController.ReadHighScore(GameController.HumanPlayer.Score,time);
 			GameController.EndCurrentState();
 		}
 	}
 
-	public static void HandleEndOfGameInput2()
+	public static void HandleEndOfGameInput2(uint time)
 	{
 		if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.vk_RETURN) || SwinGame.KeyTyped(KeyCode.vk_F11) || SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
 		{

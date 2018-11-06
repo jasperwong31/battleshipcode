@@ -24,6 +24,9 @@ public static class GameController
 	private static Stack<GameState> _state = new Stack<GameState>();
 
 	private static AIOption _aiSetting;
+
+	public static uint time;
+
 	/// <summary>
 	/// Returns the current state of the game, indicating which screen is
 	/// currently being used
@@ -33,6 +36,8 @@ public static class GameController
 	public static GameState CurrentState {
 		get { return _state.Peek(); }
 	}
+
+
 
 	/// <summary>
 	/// Returns the human player.
@@ -487,11 +492,11 @@ public static class GameController
 				DiscoveryController3.HandleDiscoveryInput();
 				break;
 			case GameState.EndingGame:
-				EndingGameController.HandleEndOfGameInput();
+				EndingGameController.HandleEndOfGameInput(time);
 				break;
 			case GameState.EndingGame2:
 			case GameState.EndingGame3:
-				EndingGameController.HandleEndOfGameInput2();
+				EndingGameController.HandleEndOfGameInput2(time);
 				break;
 			case GameState.ViewingHighScores:
 				HighScoreController.HandleHighScoreInput();
@@ -537,7 +542,7 @@ public static class GameController
 				DeploymentController3.DrawDeployment();
 				break;
 			case GameState.Discovering:
-				DiscoveryController.DrawDiscovery();
+				DiscoveryController.DrawDiscovery(time);
 				break;
 			case GameState.Discovering2:
 				DiscoveryController2.DrawDiscovery();

@@ -234,6 +234,10 @@ public class Player : IEnumerable<Ship>
 			} while (!placementSuccessful);
 		}
 	}
+	public void RemoveShip(int row, int col, ShipName ship, Direction direction)
+	{
+		Ship newShip = _Ships[ship];
+		newShip.Remove();		}
 }
 
 //=======================================================
