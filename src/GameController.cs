@@ -390,6 +390,18 @@ public static class GameController
 		result = _theGame2.Shoot(row, col);
 		CheckAttackResult3(result);	}
 
+	public static void RandomAttack2(int row, int col)
+	{
+		AttackResult result = default(AttackResult);
+		result = _theGame2.Shoot(row, col);
+		CheckAttackResult2(result);	}
+
+	public static void RandomAttack3(int row, int col)
+	{
+		AttackResult result = default(AttackResult);
+		result = _theGame2.Shoot(row, col);
+		CheckAttackResult3(result);	}
+
 	/// <summary>
 	/// Gets the AI to attack.
 	/// </summary>
@@ -429,8 +441,7 @@ public static class GameController
 		switch (result.Value)
 		{
 			case ResultOfAttack.Miss:
-				if (object.ReferenceEquals(_theGame2.Player, HumanPlayer2))
-					_state.Push(GameState.Discovering3);
+				_state.Push(GameState.Discovering3);
 				break;
 			case ResultOfAttack.GameOver:
 				SwitchState(GameState.EndingGame2);

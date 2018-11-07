@@ -39,16 +39,18 @@ C:\battleshipcode\src\obj\Debug\Battleships.pdb
 C:\battleshipcode\bin\Debug\Resources\timer.txt
 C:\battleshipcode\bin\Debug\Resources\time.txt
 C:\battleshipcode\bin\Debug\Resources\highscores.txt
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\highscores.txt
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\images\discover2.jpg
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\sounds\horrordrone.mp3
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\images\instruction.png
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\images\clear.png
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\timer.txt
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Resources\time.txt
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Battleships.exe.config
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Battleships.exe
-C:\Users\Chun Chen\Desktop\battleshipcode\bin\Debug\Battleships.pdb
-C:\Users\Chun Chen\Desktop\battleshipcode\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
-C:\Users\Chun Chen\Desktop\battleshipcode\src\obj\Debug\Battleships.exe
-C:\Users\Chun Chen\Desktop\battleshipcode\src\obj\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\highscores.txt
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\images\discover2.jpg
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\sounds\horrordrone.mp3
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\images\instruction.png
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\images\clear.png
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\timer.txt
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\time.txt
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Battleships.exe.config
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Battleships.exe
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\battleshipcode\src\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Willy\Desktop\battleshipcode\src\obj\Debug\Battleships.csproj.Battleships.exe.config
+C:\Users\Willy\Desktop\battleshipcode\src\obj\Debug\Battleships.exe
+C:\Users\Willy\Desktop\battleshipcode\src\obj\Debug\Battleships.pdb
+C:\Users\Willy\Desktop\battleshipcode\bin\Debug\Resources\images\gameplay_randomhit_button.png

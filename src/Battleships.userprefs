@@ -4,13 +4,11 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Model\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameController.cs">
     <Files>
-      <File FileName="DeploymentController.cs" Line="203" Column="3" />
-      <File FileName="GameResources.cs" Line="21" Column="34" />
-      <File FileName="HighScoreController.cs" Line="81" Column="19" />
-      <File FileName="MenuController.cs" Line="170" Column="11" />
-      <File FileName="Model\Player.cs" Line="194" Column="18" />
+      <File FileName="GameController.cs" Line="405" Column="3" />
+      <File FileName="DiscoveryController2.cs" Line="42" Column="5" />
+      <File FileName="DiscoveryController3.cs" Line="41" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

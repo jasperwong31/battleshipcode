@@ -34,6 +34,7 @@ public static class GameResources
 		NewImage("RandomButton", "deploy_randomize_button.png");
 		NewImage("Instruction", "instruction.png");
         NewImage("Clear", "Clear.png");
+		NewImage("RandomHit", "gameplay_randomhit_button.png");
 
 		//Ships
 		int i = 0;

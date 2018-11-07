@@ -23,6 +23,7 @@ public class AttackResult
 	/// <returns>The result of the attack</returns>
 	public ResultOfAttack Value {
 		get { return _Value; }
+		set { _Value = value; }
 	}
 
 	/// <summary>

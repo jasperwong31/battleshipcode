@@ -33,7 +33,17 @@ static class DiscoveryController3
 
 		if (SwinGame.MouseClicked(MouseButton.LeftButton))
 		{
-			DoAttack();
+			if (UtilityFunctions.IsMouseInRectangle(650, 80, 115, 25))
+			{
+				Random rnd = new Random();
+				int row = rnd.Next(10);
+				int column = rnd.Next(10);
+				GameController.RandomAttack3(row, column);
+			}
+			else
+			{
+				DoAttack();
+			}
 		}
 	}
 
@@ -86,6 +96,7 @@ static class DiscoveryController3
 		SwinGame.DrawText(GameController.HumanPlayer2.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
 		SwinGame.DrawText(GameController.HumanPlayer2.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
 		SwinGame.DrawText("Player 2's Phase", Color.White, GameResources.GameFont("Menu"), 100, 300);
+		SwinGame.DrawBitmap(GameResources.GameImage("RandomHit"), 650, 80);
 		//SwinGame.DrawText(GameController.setting.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_BOTTOM);
 	}
 
